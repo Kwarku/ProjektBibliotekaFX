@@ -1,16 +1,13 @@
 package pl.biblioteka.projekt;
 
-import com.sun.istack.internal.localization.Localizable;
+
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import pl.biblioteka.projekt.database.dbutils.DbManager;
 import pl.biblioteka.projekt.utils.FxmlUtils;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 
 public class Main extends Application {
@@ -32,6 +29,7 @@ public class Main extends Application {
         primaryStage.setTitle(FxmlUtils.getResourceBundle().getString("title.application"));
         primaryStage.show();
 
+        DbManager.initDatabase();
 
     }
 }
