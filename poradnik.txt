@@ -58,3 +58,15 @@
 * */
 
 ---------------------------------------------------------------------------------
+*
+*           WCZYTANIE NOWEJ FORMATKI W OKNIE GLOWNYM
+*  - tworzymy metode publiczna w klasie main contorller np. setCenter
+*  - przekazujemy jej jako parametr Stringa z sciezka do pliku fxml
+*  - nastepnie wzyczajnie wczytujemy plik fxml uzyuwajac FXMLLoadera
+*  - zamiast wymyslac jaki kontener  uzyjemy uzywamy Parent jako rodzica wszystkich kontenerow
+*  - jako sciezke podajemy nasz parametr z metody
+*  - obslugujemy wyjatek
+*  - do borderPane albo innej czesci naszego glownego kontenera dodajemy wczytana formatke
+*  - w interesujacej nas klasie powolujemy sie na ta metode i wczytujemy pieknie ze sciezki
+*
+* */

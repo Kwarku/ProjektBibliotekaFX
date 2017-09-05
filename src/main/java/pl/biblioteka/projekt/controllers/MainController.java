@@ -1,23 +1,19 @@
 package pl.biblioteka.projekt.controllers;
 
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import pl.biblioteka.projekt.utils.DialogUtils;
 
 import java.io.IOException;
-/*
-*           WCZYTANIE NOWEJ FORMATKI W OGLNIE GLOWNYM
-*  - tworzymy metode publiczna w klasie main contorller np. setCenter
-*  - przekazujemy jej jako parametr Stringa z sciezka do pliku fxml
-*  - nastepnie wzyczajnie wczytujemy plik fxml uzyuwajac FXMLLoadera
-*  - zamiast wymyslac jaki kontener  uzyjemy uzywamy Parent jako rodzica wszystkich kontenerow
-*  - jako sciezke podajemy nasz parametr z metody
-*  - obslugujemy wyjatek
-*  - do borderPane albo innej czesci naszego glownego kontenera dodajemy wczytana formatke
-*  - w interesujacej nas klasie powolujemy sie na ta metode i wczytujemy pieknie ze sciezki
-*
-* */
+import java.util.Optional;
 
 
 public class MainController {
@@ -45,6 +41,38 @@ public class MainController {
         borderPane.setCenter(parent);
 
     }
+    // zamkniecie aplikacji
+    @FXML
+    public void closeApplication() {
+        Optional<ButtonType> result = DialogUtils.confirmationDialog();
+        if (result.get() == ButtonType.OK){
+            Platform.exit();
+            System.exit(0);
+        }
 
+    }
 
+    //zmiana stylu na style domyslne
+    @FXML
+    public void setModena() {
+        Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
+    }
+
+    @FXML
+    public void setCaspian() {
+        Application.setUserAgentStylesheet(Application.STYLESHEET_CASPIAN);
+    }
+
+    // dostanie sie do stage i ustawienie opcji zawsze na wierzchu  dzieki property
+    @FXML
+    public void setAlwaysOnTop(ActionEvent actionEvent) {
+        Stage stage = (Stage) borderPane.getScene().getWindow();
+        boolean value = ((CheckMenuItem) actionEvent.getSource()).selectedProperty().get();
+        stage.setAlwaysOnTop(value);
+    }
+
+    @FXML
+    public void about() {
+        DialogUtils.dialogAboutApplication();
+    }
 }
