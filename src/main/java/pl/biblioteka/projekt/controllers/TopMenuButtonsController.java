@@ -1,5 +1,6 @@
 package pl.biblioteka.projekt.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleGroup;
 
@@ -10,6 +11,7 @@ public class TopMenuButtonsController {
     public static final String BOOK_LIST_FXML = "/fxml/BookList.fxml";
     public static final String STATISTICS_FXML = "/fxml/Statistics.fxml";
     public static final String ADD_BOOK_FXML = "/fxml/AddBook.fxml";
+    public static final String ADD_CATEGOTY_FXML = "/fxml/AddCategory.fxml";
 
     private MainController mainController;
 
@@ -40,10 +42,21 @@ public class TopMenuButtonsController {
     @FXML
     public void addBook() {
         //ta metoda wylacza nam cala grupe toogle buttonow ktore sa wstrzykniete tam wyrzej xD
+        resetToggleButtons();
+
+        mainController.setCenter(ADD_BOOK_FXML);
+    }
+
+
+    public void addCategory(ActionEvent actionEvent) {
+        resetToggleButtons();
+        mainController.setCenter(ADD_CATEGOTY_FXML);
+    }
+
+    // metoda resetuje przyciski typu toggle, zostala dodana bo nie powinno sie uzywac 2 razy tego samego kodu
+    private void resetToggleButtons() {
         if (toggleButtons.getSelectedToggle() != null) {
             toggleButtons.getSelectedToggle().setSelected(false);
         }
-
-        mainController.setCenter(ADD_BOOK_FXML);
     }
 }

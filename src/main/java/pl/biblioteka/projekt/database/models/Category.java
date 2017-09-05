@@ -6,19 +6,16 @@ import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "CATEGORY")
-public class Category implements BaseModel{
+public class Category implements BaseModel {
     public Category() {
     }
 
     @DatabaseField(generatedId = true)
     private int id;
 
-    @DatabaseField(columnName = "NAME" , canBeNull = false)
+    @DatabaseField(columnName = "NAME", canBeNull = false)
     private String name;
 
-    // wlasna kolekcja ksiazek dla danej kategorii
-    @ForeignCollectionField(eager = true)
-    private ForeignCollection<Book> books;
 
     public int getId() {
         return id;
@@ -36,11 +33,4 @@ public class Category implements BaseModel{
         this.name = name;
     }
 
-    public ForeignCollection<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(ForeignCollection<Book> books) {
-        this.books = books;
-    }
 }
