@@ -40,7 +40,7 @@ public class TopMenuButtonsController {
     @FXML
     public void addBook() {
         //ta metoda wylacza nam cala grupe toogle buttonow ktore sa wstrzykniete tam wyrzej xD
-        if (toggleButtons.getSelectedToggle() != null){
+        if (toggleButtons.getSelectedToggle() != null) {
             toggleButtons.getSelectedToggle().setSelected(false);
         }
 

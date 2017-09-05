@@ -11,6 +11,7 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import pl.biblioteka.projekt.utils.DialogUtils;
+import pl.biblioteka.projekt.utils.FxmlUtils;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -25,27 +26,21 @@ public class MainController {
     private TopMenuButtonsController topMenuButtonsController;
 
     @FXML
-    private void initialize(){
+    private void initialize() {
         topMenuButtonsController.setMainController(this);
     }
 
-    public void setCenter(String fxmlPath){
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource(fxmlPath));
-        Parent parent = null;
-        try {
-            parent = loader.load();
-        } catch (IOException e) {
-            System.err.println("nie mozna wczytac okna centralnego dla border pane");
-            e.printStackTrace();
-        }
-        borderPane.setCenter(parent);
+    public void setCenter(String fxmlPath) {
+
+        borderPane.setCenter(FxmlUtils.fxmlLoader(fxmlPath));
 
     }
+
     // zamkniecie aplikacji
     @FXML
     public void closeApplication() {
         Optional<ButtonType> result = DialogUtils.confirmationDialog();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             Platform.exit();
             System.exit(0);
         }
