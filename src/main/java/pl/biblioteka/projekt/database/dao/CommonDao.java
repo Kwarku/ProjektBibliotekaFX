@@ -28,7 +28,7 @@ public abstract class CommonDao {
         try {
             dao.createOrUpdate((T) baseModel);
         } catch (SQLException e) {
-            LOGGER.warn(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -37,7 +37,7 @@ public abstract class CommonDao {
         try {
             dao.refresh((T) baseModel);
         } catch (SQLException e) {
-            LOGGER.warn(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -46,8 +46,25 @@ public abstract class CommonDao {
         try {
             dao.delete((T) baseModel);
         } catch (SQLException e) {
-            LOGGER.warn(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
+    }
+    public <T extends BaseModel, I> void deleteByID(Class<T> cls, Integer id){
+        Dao<T,I> dao = getDao(cls);
+        try {
+            dao.deleteById((I) id);
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+    }
+public <T extends BaseModel, I> T findByID(Class<T> cls, Integer id){
+        Dao<T,I> dao = getDao(cls);
+        try {
+             return dao.queryForId((I) id);
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+        return null;
     }
 
 
@@ -57,7 +74,7 @@ public abstract class CommonDao {
         try {
             return dao.queryForAll();
         } catch (SQLException e) {
-            LOGGER.warn(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
         return null;
     }
@@ -67,7 +84,7 @@ public abstract class CommonDao {
         try {
             return DaoManager.createDao(connectionSource, cls);
         } catch (SQLException e) {
-            LOGGER.warn(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
         return null;
     }

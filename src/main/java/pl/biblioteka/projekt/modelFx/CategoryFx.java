@@ -35,4 +35,11 @@ public class CategoryFx {
     public void setName(String name) {
         this.name.set(name);
     }
+
+
+    // dzieki metodzie wypisania spokojnie obiekty w comboboxie sie wypisuja
+    @Override
+    public String toString() {
+        return name.getValue();
+    }
 }
