@@ -1,5 +1,5 @@
-pl\biblioteka\projekt\utils\FxmlUtils.class
-pl\biblioteka\projekt\utils\DialogUtils.class
 pl\biblioteka\projekt\controllers\TopMenuButtonsController.class
 pl\biblioteka\projekt\controllers\MainController.class
 pl\biblioteka\projekt\Main.class
+pl\biblioteka\projekt\utils\FxmlUtils.class
+pl\biblioteka\projekt\utils\DialogUtils.class

@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import pl.biblioteka.projekt.modelFx.CategoryFx;
 import pl.biblioteka.projekt.modelFx.CategoryModel;
 import pl.biblioteka.projekt.utils.DialogUtils;
+import pl.biblioteka.projekt.utils.exceptions.ApplicationException;
 
 public class CategoryController {
 
@@ -33,7 +34,11 @@ public class CategoryController {
     @FXML
     public void initialize() {
         this.categoryModel = new CategoryModel();
-        this.categoryModel.init();
+        try {
+            this.categoryModel.init();
+        } catch (ApplicationException e) {
+            DialogUtils.errorDialog(e.getMessage());
+        }
         // przypisanie do comboBoxa calej zawartosi listy z danymi z bazy danych
         this.addCategoryComboBox.setItems(this.categoryModel.getCategoryList());
         initBindings();
@@ -47,12 +52,20 @@ public class CategoryController {
     }
 
     public void addCategoryOnAction( ) {
-        categoryModel.saveCategoryInDataBase(addCategoryTextField.getText());
+        try {
+            categoryModel.saveCategoryInDataBase(addCategoryTextField.getText());
+        } catch (ApplicationException e) {
+            DialogUtils.errorDialog(e.getMessage());
+        }
         addCategoryTextField.clear();
     }
 
     public void deleteCategoryOnAction() {
-        categoryModel.deleteCategoryByID();
+        try {
+            categoryModel.deleteCategoryByID();
+        } catch (ApplicationException e) {
+            DialogUtils.errorDialog(e.getMessage());
+        }
     }
 
     //metoda ktora po wcisnieciu comboBoxa przechwytuje obiekt wyswietlony i przypisauje go do categoryModel aby mozna bylo nim sterowac
@@ -66,7 +79,11 @@ public class CategoryController {
 
         if (newCategoryName != null){
             this.categoryModel.getCategory().setName(newCategoryName);
-            this.categoryModel.updateCategoryInDataBase();
+            try {
+                this.categoryModel.updateCategoryInDataBase();
+            } catch (ApplicationException e) {
+                DialogUtils.errorDialog(e.getMessage());
+            }
         }
     }
 }

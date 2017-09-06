@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import pl.biblioteka.projekt.database.dao.CategoryDao;
 import pl.biblioteka.projekt.database.dbutils.DbManager;
 import pl.biblioteka.projekt.database.models.Category;
+import pl.biblioteka.projekt.utils.exceptions.ApplicationException;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class CategoryModel {
     private ObjectProperty<CategoryFx> category = new SimpleObjectProperty<>();
 
     // metoda ktora wypelni combobox category danymi z bazy danych
-    public void init(){
+    public void init() throws ApplicationException {
         //polaczenie z baza danych
         CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
 
@@ -42,7 +43,7 @@ public class CategoryModel {
 
     }
 
-    public void deleteCategoryByID(){
+    public void deleteCategoryByID() throws ApplicationException {
         CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
         // odnosi sie do metody z klasy abstrakcyjnej i usuwa obikt o podanym id z listy
         categoryDao.deleteByID(Category.class, category.getValue().getId());
@@ -50,7 +51,7 @@ public class CategoryModel {
         init();
     }
 
-    public void saveCategoryInDataBase(String name) {
+    public void saveCategoryInDataBase(String name) throws ApplicationException {
         CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
         Category category = new Category();
         category.setName(name);
@@ -61,7 +62,7 @@ public class CategoryModel {
     }
 
     // szuka obiektow po id nastepnie je zmienia nastepnie updateuje
-    public void updateCategoryInDataBase() {
+    public void updateCategoryInDataBase() throws ApplicationException {
         CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
         Category tempCategory = categoryDao.findByID(Category.class, getCategory().getId());
         tempCategory.setName(getCategory().getName());
