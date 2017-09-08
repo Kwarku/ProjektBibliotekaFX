@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeView;
 import pl.biblioteka.projekt.modelFx.CategoryFx;
 import pl.biblioteka.projekt.modelFx.CategoryModel;
 import pl.biblioteka.projekt.utils.DialogUtils;
@@ -28,6 +29,10 @@ public class CategoryController {
     @FXML
     private Button delCategoryButton;
 
+    @FXML
+    private TreeView<String> categoryTreeView;
+
+
     private CategoryModel categoryModel;
 
     // metoda initialize jest pierwsza metoda po konstruktorze wykonywana
@@ -41,6 +46,9 @@ public class CategoryController {
         }
         // przypisanie do comboBoxa calej zawartosi listy z danymi z bazy danych
         this.addCategoryComboBox.setItems(this.categoryModel.getCategoryList());
+        //polaczenie drzewa wyswietlnej z itemem z modelu
+        this.categoryTreeView.setRoot(this.categoryModel.getRoot());
+
         initBindings();
     }
 

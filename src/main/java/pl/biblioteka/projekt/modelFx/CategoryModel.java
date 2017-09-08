@@ -5,9 +5,11 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TreeItem;
 import pl.biblioteka.projekt.database.dao.CategoryDao;
 import pl.biblioteka.projekt.database.dbutils.DbManager;
 import pl.biblioteka.projekt.database.models.Category;
+import pl.biblioteka.projekt.utils.converters.CategoryConverter;
 import pl.biblioteka.projekt.utils.exceptions.ApplicationException;
 
 import java.util.List;
@@ -18,29 +20,42 @@ public class CategoryModel {
 
     private ObservableList<CategoryFx> categoryList = FXCollections.observableArrayList();
     private ObjectProperty<CategoryFx> category = new SimpleObjectProperty<>();
+    private TreeItem<String> root = new TreeItem<>();
 
     // metoda ktora wypelni combobox category danymi z bazy danych
     public void init() throws ApplicationException {
-        //polaczenie z baza danych
         CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
-
-        // lista obiektow z tabeli kategorie
         List<Category> categories = categoryDao.queryForAll(Category.class);
-
-        //czyszczenie listy aby przy odswierzeniu nie dublowaly sie rekordy
-        this.categoryList.clear();
-
-        // dla kazdego elementu listy tworzy obiekt categoryfx i wypelnia go danymi z bazy dancyh i dodaje do categoryList
-        categories.forEach(c->{
-            CategoryFx categoryFx = new CategoryFx();
-            categoryFx.setId(c.getId());
-            categoryFx.setName(c.getName());
-            this.categoryList.add(categoryFx);
-        });
-        //zamyka polaczenie z baza danych
+        initCategoryList(categories);
+        initRoot(categories);
         DbManager.closeConnectionSource();
 
 
+    }
+
+     /*uzupelnianie drzewa kategorii:
+     * pobieramy wszystkie wpisy z tabeli kategorie, nastepnie dla kazdego pobranego itemu tworzymy nowy TreeItem jako
+     * prosty string i przypisujemy mu nazwe kategorii po czym dodajemy go do calego roota,
+     * Aby dodac liste ksiazek do tego drzewa nalezy podczas tworzenia kolejnego wpisu przejechac sie po kategoriach i dodac
+     * ich ksiazki,
+     * by lista sie ladnie odswiezala nalezy przed cala zabawa zyczyscic dzieci tej listy*/
+    private void initRoot(List<Category> categories) {
+        this.root.getChildren().clear();
+        categories.forEach(c->{
+            TreeItem<String> categoryItem = new TreeItem<>(c.getName());
+            c.getBooks().forEach(b->{
+                categoryItem.getChildren().add(new TreeItem<>(b.getTitle()));
+            });
+            root.getChildren().add(categoryItem);
+        });
+    }
+
+    private void initCategoryList(List<Category> categories) {
+        this.categoryList.clear();
+        categories.forEach(c->{
+            CategoryFx categoryFx = CategoryConverter.convertToCategoryFx(c);
+            this.categoryList.add(categoryFx);
+        });
     }
 
     public void deleteCategoryByID() throws ApplicationException {
@@ -92,5 +107,13 @@ public class CategoryModel {
 
     public void setCategory(CategoryFx category) {
         this.category.set(category);
+    }
+
+    public TreeItem<String> getRoot() {
+        return root;
+    }
+
+    public void setRoot(TreeItem<String> root) {
+        this.root = root;
     }
 }

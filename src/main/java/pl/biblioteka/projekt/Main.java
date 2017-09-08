@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import pl.biblioteka.projekt.database.dbutils.DbManager;
 import pl.biblioteka.projekt.utils.FxmlUtils;
-
+import pl.biblioteka.projekt.utils.exceptions.FillDatabase;
 
 
 public class Main extends Application {
@@ -30,6 +30,7 @@ public class Main extends Application {
         primaryStage.show();
 
         DbManager.initDatabase();
+        FillDatabase.fillDatabase();
 
     }
 }
