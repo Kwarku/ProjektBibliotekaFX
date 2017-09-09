@@ -59,7 +59,7 @@ public class CategoryController {
         this.editCategoryButton.disableProperty().bind(this.categoryModel.categoryProperty().isNull());
     }
 
-    public void addCategoryOnAction( ) {
+    public void addCategoryOnAction() {
         try {
             categoryModel.saveCategoryInDataBase(addCategoryTextField.getText());
         } catch (ApplicationException e) {
@@ -85,7 +85,7 @@ public class CategoryController {
     public void editCategoryOnAction() {
         String newCategoryName = DialogUtils.editDialog(this.categoryModel.getCategory().getName());
 
-        if (newCategoryName != null){
+        if (newCategoryName != null) {
             this.categoryModel.getCategory().setName(newCategoryName);
             try {
                 this.categoryModel.updateCategoryInDataBase();
