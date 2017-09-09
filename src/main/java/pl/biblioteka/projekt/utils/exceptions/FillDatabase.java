@@ -26,19 +26,19 @@ public class FillDatabase {
         book1.setCategory(category1);
         book1.setAuthor(author);
         book1.setTitle("Kolor magii");
-        book1.setIsbn(9765132354123431l);
+        book1.setIsbn(9765132354123431L);
         book1.setRating(3);
         book1.setReleaseDate(new Date());
         book1.setAddedDate(new Date());
 
         Author author2 = new Author();
-        author2.setName("Adami");
+        author2.setName("Adam");
         author2.setSurname("Mickiewicz");
         Book book2 = new Book();
         book2.setCategory(category2);
         book2.setAuthor(author2);
         book2.setTitle("Pan Tadeusz");
-        book2.setIsbn(12345698562l);
+        book2.setIsbn(12345698562L);
         book2.setRating(2);
         book2.setReleaseDate(new Date());
         book2.setAddedDate(new Date());
@@ -50,7 +50,7 @@ public class FillDatabase {
         book3.setCategory(category3);
         book3.setAuthor(author3);
         book3.setTitle("Piesn lodu i ognia");
-        book3.setIsbn(1264598743544l);
+        book3.setIsbn(1264598743544L);
         book3.setRating(5);
         book3.setReleaseDate(new Date());
         book3.setAddedDate(new Date());
@@ -62,7 +62,7 @@ public class FillDatabase {
         book4.setCategory(category4);
         book4.setAuthor(author4);
         book4.setTitle("Inne piesni");
-        book4.setIsbn(123456l);
+        book4.setIsbn(123456L);
         book4.setRating(5);
         book4.setReleaseDate(new Date());
         book4.setAddedDate(new Date());

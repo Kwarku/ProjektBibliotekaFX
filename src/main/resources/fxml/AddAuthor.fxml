@@ -6,16 +6,16 @@
 <?import javafx.scene.layout.VBox?>
 <VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="pl.biblioteka.projekt.controllers.AuthorController">
-    <children>
+
         <HBox alignment="TOP_CENTER" prefWidth="600.0" spacing="20.0">
-            <children>
+
                 <Label text="%author.name"/>
                 <TextField fx:id="authorNameTextField"/>
                 <Label text="%author.surname"/>
                 <TextField fx:id="authorSurnameTextField"/>
                 <Button fx:id="addAuthorButton" mnemonicParsing="false" onAction="#addAuthorOnAction"
                         text="%add.button"/>
-            </children>
+
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </padding>
@@ -26,12 +26,13 @@
                 <Insets/>
             </VBox.margin>
         </HBox>
-        <TableView fx:id="authorTableView" maxWidth="600.0" nodeOrientation="LEFT_TO_RIGHT"
+        <TableView fx:id="authorTableView" editable="true" maxWidth="600.0" nodeOrientation="LEFT_TO_RIGHT"
                    tableMenuButtonVisible="true">
             <columns>
-                <TableColumn fx:id="nameColumn" maxWidth="600.0" minWidth="-1.0" prefWidth="-1.0" text="%author.name"/>
-                <TableColumn fx:id="surnameColumn" maxWidth="600.0" minWidth="-1.0" prefWidth="-1.0"
-                             text="%author.surname"/>
+                <TableColumn fx:id="nameColumn" maxWidth="600.0" minWidth="-1.0" onEditCommit="#onEditCommitName"
+                             prefWidth="-1.0" text="%author.name"/>
+                <TableColumn fx:id="surnameColumn" maxWidth="600.0" minWidth="-1.0" onEditCommit="#onEditCommitSurname"
+                             prefWidth="-1.0" text="%author.surname"/>
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
@@ -43,5 +44,5 @@
                 <Insets/>
             </opaqueInsets>
         </TableView>
-    </children>
+
 </VBox>
