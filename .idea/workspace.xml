@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ef66ceb6-4462-4f47-a094-470aff676747" name="Default" comment="edytowanie autora w kolumnie">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraryDB.mv.db" afterPath="$PROJECT_DIR$/libraryDB.mv.db" />
+    <list default="true" id="ef66ceb6-4462-4f47-a094-470aff676747" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/controllers/CategoryController.class" afterPath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/controllers/CategoryController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/controllers/MainController.class" afterPath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/controllers/MainController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/controllers/TopMenuButtonsController.class" afterPath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/controllers/TopMenuButtonsController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/database/dao/CommonDao.class" afterPath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/database/dao/CommonDao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/database/dbutils/DbManager.class" afterPath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/database/dbutils/DbManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/database/models/Author.class" afterPath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/database/models/Author.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/database/models/Book.class" afterPath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/database/models/Book.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/database/models/Category.class" afterPath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/database/models/Category.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/modelFx/CategoryFx.class" afterPath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/modelFx/CategoryFx.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/modelFx/CategoryModel.class" afterPath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/modelFx/CategoryModel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/utils/FxmlUtils.class" afterPath="$PROJECT_DIR$/target/classes/pl/biblioteka/projekt/utils/FxmlUtils.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pl/biblioteka/projekt/controllers/AuthorController.java" afterPath="$PROJECT_DIR$/src/main/java/pl/biblioteka/projekt/controllers/AuthorController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pl/biblioteka/projekt/database/models/Author.java" afterPath="$PROJECT_DIR$/src/main/java/pl/biblioteka/projekt/database/models/Author.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pl/biblioteka/projekt/modelFx/AuthorModel.java" afterPath="$PROJECT_DIR$/src/main/java/pl/biblioteka/projekt/modelFx/AuthorModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pl/biblioteka/projekt/utils/exceptions/FillDatabase.java" afterPath="$PROJECT_DIR$/src/main/java/pl/biblioteka/projekt/utils/exceptions/FillDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/fxml/AddAuthor.fxml" afterPath="$PROJECT_DIR$/src/main/resources/fxml/AddAuthor.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/fxml/AddBook.fxml" afterPath="$PROJECT_DIR$/target/classes/fxml/AddBook.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/fxml/AddCategory.fxml" afterPath="$PROJECT_DIR$/target/classes/fxml/AddCategory.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/fxml/BookList.fxml" afterPath="$PROJECT_DIR$/target/classes/fxml/BookList.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/fxml/BorderPaneMain.fxml" afterPath="$PROJECT_DIR$/target/classes/fxml/BorderPaneMain.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/fxml/Library.fxml" afterPath="$PROJECT_DIR$/target/classes/fxml/Library.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/fxml/Statistics.fxml" afterPath="$PROJECT_DIR$/target/classes/fxml/Statistics.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/fxml/TopMenuButtons.fxml" afterPath="$PROJECT_DIR$/target/classes/fxml/TopMenuButtons.fxml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -35,8 +47,8 @@
       <file leaf-file-name="AuthorController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/biblioteka/projekt/controllers/AuthorController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="58" column="69" lean-forward="false" selection-start-line="58" selection-start-column="69" selection-end-line="58" selection-end-column="69" />
+            <state relative-caret-position="290">
+              <caret line="63" column="9" lean-forward="true" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -57,8 +69,8 @@
       <file leaf-file-name="AddAuthor.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/AddAuthor.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="867">
-              <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+            <state relative-caret-position="714">
+              <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -625,7 +637,7 @@
       <workItem from="1504769619323" duration="524000" />
       <workItem from="1504844789994" duration="3796000" />
       <workItem from="1504887868054" duration="2605000" />
-      <workItem from="1504955336778" duration="10716000" />
+      <workItem from="1504955336778" duration="10773000" />
     </task>
     <task id="LOCAL-00001" summary="start projektu,">
       <created>1504001330819</created>
@@ -704,11 +716,18 @@
       <option name="project" value="LOCAL" />
       <updated>1504973865777</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="edytowanie autora w kolumnie">
+      <created>1504976447388</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1504976447388</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70603000" />
+    <option name="totallyTimeSpent" value="70660000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -725,14 +744,14 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3249453" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3249453" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.124726474" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.124726474" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32822758" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27352297" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27352297" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -814,6 +833,7 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <MESSAGE value="start projektu," />
     <MESSAGE value="stworzenie referencji do sterowania" />
     <MESSAGE value="stowrzenie Internacjonalizacji i Resource bundles" />
@@ -827,6 +847,7 @@
     <MESSAGE value="wyswietlanie autora" />
     <MESSAGE value="edytowanie autora w kolumnie" />
     <option name="LAST_COMMIT_MESSAGE" value="edytowanie autora w kolumnie" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1248,8 +1269,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/fxml/AddAuthor.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+        <state relative-caret-position="714">
+          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1267,8 +1288,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/biblioteka/projekt/controllers/AuthorController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="58" column="69" lean-forward="false" selection-start-line="58" selection-start-column="69" selection-end-line="58" selection-end-column="69" />
+        <state relative-caret-position="290">
+          <caret line="63" column="9" lean-forward="true" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
