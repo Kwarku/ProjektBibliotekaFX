@@ -43,14 +43,14 @@ public class DialogUtils {
     }
 
     //okno komunikacji
-    public static String editDialog(String value){
+    public static String editDialog(String value) {
         TextInputDialog dialog = new TextInputDialog(value);
         dialog.setTitle(bundle.getString("edit.title"));
         dialog.setHeaderText(bundle.getString("edit.header"));
         dialog.setContentText(bundle.getString("edit.content"));
         // pobieramy stringa i jezeli jest to go zwracamy jezeli nie to zwracamy null
         Optional<String> result = dialog.showAndWait();
-        if (result.isPresent()){
+        if (result.isPresent()) {
             return result.get();
         }
         return null;

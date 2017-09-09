@@ -1,6 +1,5 @@
 package pl.biblioteka.projekt.modelFx;
 
-import com.j256.ormlite.dao.DaoManager;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -33,17 +32,17 @@ public class CategoryModel {
 
     }
 
-     /*uzupelnianie drzewa kategorii:
-     * pobieramy wszystkie wpisy z tabeli kategorie, nastepnie dla kazdego pobranego itemu tworzymy nowy TreeItem jako
-     * prosty string i przypisujemy mu nazwe kategorii po czym dodajemy go do calego roota,
-     * Aby dodac liste ksiazek do tego drzewa nalezy podczas tworzenia kolejnego wpisu przejechac sie po kategoriach i dodac
-     * ich ksiazki,
-     * by lista sie ladnie odswiezala nalezy przed cala zabawa zyczyscic dzieci tej listy*/
+    /*uzupelnianie drzewa kategorii:
+    * pobieramy wszystkie wpisy z tabeli kategorie, nastepnie dla kazdego pobranego itemu tworzymy nowy TreeItem jako
+    * prosty string i przypisujemy mu nazwe kategorii po czym dodajemy go do calego roota,
+    * Aby dodac liste ksiazek do tego drzewa nalezy podczas tworzenia kolejnego wpisu przejechac sie po kategoriach i dodac
+    * ich ksiazki,
+    * by lista sie ladnie odswiezala nalezy przed cala zabawa zyczyscic dzieci tej listy*/
     private void initRoot(List<Category> categories) {
         this.root.getChildren().clear();
-        categories.forEach(c->{
+        categories.forEach(c -> {
             TreeItem<String> categoryItem = new TreeItem<>(c.getName());
-            c.getBooks().forEach(b->{
+            c.getBooks().forEach(b -> {
                 categoryItem.getChildren().add(new TreeItem<>(b.getTitle()));
             });
             root.getChildren().add(categoryItem);
@@ -52,7 +51,7 @@ public class CategoryModel {
 
     private void initCategoryList(List<Category> categories) {
         this.categoryList.clear();
-        categories.forEach(c->{
+        categories.forEach(c -> {
             CategoryFx categoryFx = CategoryConverter.convertToCategoryFx(c);
             this.categoryList.add(categoryFx);
         });
@@ -101,12 +100,12 @@ public class CategoryModel {
         return category.get();
     }
 
-    public ObjectProperty<CategoryFx> categoryProperty() {
-        return category;
-    }
-
     public void setCategory(CategoryFx category) {
         this.category.set(category);
+    }
+
+    public ObjectProperty<CategoryFx> categoryProperty() {
+        return category;
     }
 
     public TreeItem<String> getRoot() {

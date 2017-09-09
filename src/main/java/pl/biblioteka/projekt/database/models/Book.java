@@ -8,32 +8,25 @@ import java.util.Date;
 @DatabaseTable(tableName = "BOOKS")
 public class Book implements BaseModel {
 
-    public Book() {
-    }
-
     @DatabaseField(generatedId = true)
     private int id;
-
     @DatabaseField(columnName = "AUTHOR_ID", foreign = true, foreignAutoRefresh = true, foreignAutoCreate = true, canBeNull = false)
     private Author author;
-
     @DatabaseField(columnName = "CATEGORY_ID", foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, canBeNull = false)
     private Category category;
-
     @DatabaseField(columnName = "TITLE", canBeNull = false)
     private String title;
-
     @DatabaseField(columnName = "RELEASE_DATE")
     private Date releaseDate;
-
     @DatabaseField(columnName = "ISBN")
     private long isbn;
-
     @DatabaseField(columnName = "RATING", width = 1)
     private int rating;
-
     @DatabaseField(columnName = "ADDED_DATE")
     private Date addedDate;
+
+    public Book() {
+    }
 
     public int getId() {
         return id;

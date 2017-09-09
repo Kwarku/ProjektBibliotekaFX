@@ -3,7 +3,6 @@ package pl.biblioteka.projekt.utils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
-import java.io.IOException;
 import java.util.ResourceBundle;
 
 public class FxmlUtils {

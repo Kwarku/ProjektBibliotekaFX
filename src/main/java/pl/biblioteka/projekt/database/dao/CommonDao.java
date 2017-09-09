@@ -8,10 +8,8 @@ import com.j256.ormlite.logger.LoggerFactory;
 import com.j256.ormlite.support.ConnectionSource;
 import pl.biblioteka.projekt.database.dbutils.DbManager;
 import pl.biblioteka.projekt.database.models.BaseModel;
-import pl.biblioteka.projekt.utils.DialogUtils;
 import pl.biblioteka.projekt.utils.FxmlUtils;
 import pl.biblioteka.projekt.utils.exceptions.ApplicationException;
-
 
 import java.sql.SQLException;
 import java.util.List;
@@ -57,8 +55,9 @@ public abstract class CommonDao {
             throw new ApplicationException(FxmlUtils.getResourceBundle().getString("error.delete"));
         }
     }
+
     public <T extends BaseModel, I> void deleteByID(Class<T> cls, Integer id) throws ApplicationException {
-        Dao<T,I> dao = getDao(cls);
+        Dao<T, I> dao = getDao(cls);
         try {
             dao.deleteById((I) id);
         } catch (SQLException e) {
@@ -66,15 +65,16 @@ public abstract class CommonDao {
             throw new ApplicationException(FxmlUtils.getResourceBundle().getString("error.delete"));
         }
     }
-public <T extends BaseModel, I> T findByID(Class<T> cls, Integer id) throws ApplicationException {
-        Dao<T,I> dao = getDao(cls);
+
+    public <T extends BaseModel, I> T findByID(Class<T> cls, Integer id) throws ApplicationException {
+        Dao<T, I> dao = getDao(cls);
         try {
-             return dao.queryForId((I) id);
+            return dao.queryForId((I) id);
         } catch (SQLException e) {
             LOGGER.error(e.getCause().getMessage());
             throw new ApplicationException(FxmlUtils.getResourceBundle().getString("error.no.found"));
         }
-}
+    }
 
 
     public <T extends BaseModel, I> List<T> queryForAll(Class<T> cls) throws ApplicationException {

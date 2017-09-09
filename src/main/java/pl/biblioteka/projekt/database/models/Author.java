@@ -8,21 +8,18 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "AUTHORS")
 public class Author implements BaseModel {
-    public Author() {
-    }
-
     @DatabaseField(generatedId = true)
     private int id;
-
     @DatabaseField(columnName = "NAME", /*canBeNull = false,*/ unique = true)
     private String name;
-
     @DatabaseField(columnName = "SURNAME", /*canBeNull = false,*/ unique = true)
     private String surname;
-
     // wlasna kolecja ksiazek dla danego autora
     @ForeignCollectionField(eager = true)
     private ForeignCollection<Book> books;
+
+    public Author() {
+    }
 
     public int getId() {
         return id;

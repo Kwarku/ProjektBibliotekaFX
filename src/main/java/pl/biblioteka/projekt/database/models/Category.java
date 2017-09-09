@@ -7,19 +7,15 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "CATEGORY")
 public class Category implements BaseModel {
-    public Category() {
-    }
-
     @DatabaseField(generatedId = true)
     private int id;
-
     @DatabaseField(columnName = "NAME", canBeNull = false, unique = true)
     private String name;
-
     @ForeignCollectionField(columnName = "BOOK_ID")
     private ForeignCollection<Book> books;
 
-
+    public Category() {
+    }
 
     public int getId() {
         return id;

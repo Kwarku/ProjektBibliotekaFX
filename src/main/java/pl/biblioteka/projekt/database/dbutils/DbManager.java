@@ -16,15 +16,13 @@ import java.sql.SQLException;
 
 public class DbManager {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DbManager.class);
-
     public static final String JDBC_DRIVER_HD = "jdbc:h2:./libraryDB";
     public static final String USER = "admin";
     public static final String PASS = "admin";
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(DbManager.class);
     private static ConnectionSource connectionSource;
 
-    public static void initDatabase(){
+    public static void initDatabase() {
         createConnectionSource();       // tworzenie polaczanie
         dropTable();                    // usuwanie tabel wszystkich
         createTable();                  // tworzenie nowych tabel
@@ -32,7 +30,7 @@ public class DbManager {
     }
 
     // tworzy polaczaczenie z baza dancych, nalezy podac login i haslo
-    private static void createConnectionSource(){
+    private static void createConnectionSource() {
         try {
             connectionSource = new JdbcConnectionSource(JDBC_DRIVER_HD, USER, PASS);
         } catch (SQLException e) {
@@ -41,16 +39,16 @@ public class DbManager {
     }
 
     // zwraca polaczaczenie
-    public static ConnectionSource getConnectionSource(){
-        if (connectionSource == null){
+    public static ConnectionSource getConnectionSource() {
+        if (connectionSource == null) {
             createConnectionSource();
         }
         return connectionSource;
     }
 
     // zamyka polaczenie z baza dancyh, jezeli wystepuje blad wyrzuca do logera
-    public static void closeConnectionSource(){
-        if (connectionSource != null){
+    public static void closeConnectionSource() {
+        if (connectionSource != null) {
             try {
                 connectionSource.close();
             } catch (IOException e) {
@@ -60,7 +58,7 @@ public class DbManager {
     }
 
     // tworzy tabele jezeli nie sa utworzone
-    private static void createTable(){
+    private static void createTable() {
         try {
             TableUtils.createTableIfNotExists(connectionSource, Author.class);
             TableUtils.createTableIfNotExists(connectionSource, Book.class);
@@ -71,7 +69,7 @@ public class DbManager {
     }
 
     // usuwa tabele
-    private static void dropTable(){
+    private static void dropTable() {
         try {
             TableUtils.dropTable(connectionSource, Author.class, true);
             TableUtils.dropTable(connectionSource, Book.class, true);

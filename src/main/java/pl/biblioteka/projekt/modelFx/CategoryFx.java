@@ -16,26 +16,25 @@ public class CategoryFx {
         return id.get();
     }
 
-    public IntegerProperty idProperty() {
-        return id;
-    }
-
     public void setId(int id) {
         this.id.set(id);
+    }
+
+    public IntegerProperty idProperty() {
+        return id;
     }
 
     public String getName() {
         return name.get();
     }
 
-    public StringProperty nameProperty() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name.set(name);
     }
 
+    public StringProperty nameProperty() {
+        return name;
+    }
 
     // dzieki metodzie wypisania spokojnie obiekty w comboboxie sie wypisuja
     @Override
