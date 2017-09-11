@@ -50,14 +50,11 @@ public class BookController {
         //wypelnienie comboboxow lista z modelu
         this.categoryComboBox.setItems(this.bookModel.getCategoryFxObservableList());
         this.authorComboBox.setItems(this.bookModel.getAuthorFxObservableList());
-
         //bindowanie elementeow z bookModel i bookfx
         this.bookModel.bookFxObjectPropertyProperty().get().authorFxProperty().bind(this.authorComboBox.valueProperty());
         this.bookModel.bookFxObjectPropertyProperty().get().categoryFxProperty().bind(this.categoryComboBox.valueProperty());
         this.bookModel.bookFxObjectPropertyProperty().get().titleProperty().bind(bookTitleTextField.textProperty());
         this.bookModel.bookFxObjectPropertyProperty().get().descriptionProperty().bind(this.bookDescriptionTextArea.textProperty());
-
-
         this.bookModel.bookFxObjectPropertyProperty().get().isbnProperty().bind(this.bookIsbnTextField.textProperty());
         this.bookModel.bookFxObjectPropertyProperty().get().noteProperty().bind(this.bookNoteSlider.valueProperty());
         this.bookModel.bookFxObjectPropertyProperty().get().releaseDateProperty().bind(this.bookReleaseDatePicker.valueProperty());
@@ -65,7 +62,11 @@ public class BookController {
 
     @FXML
     void addBookOnAction() {
-        System.out.println(this.bookModel.getBookFxObjectProperty().toString());
+        try {
+            this.bookModel.saveBookInDatabase();
+        } catch (ApplicationException e) {
+            DialogUtils.errorDialog(e.getMessage());
+        }
 
     }
 

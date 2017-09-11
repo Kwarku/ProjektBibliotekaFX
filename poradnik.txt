@@ -70,3 +70,41 @@
 *  - w interesujacej nas klasie powolujemy sie na ta metode i wczytujemy pieknie ze sciezki
 *
 * */
+
+
+---------------------------------------------------------------------------------
+/*Dodanie obslugi klasy w bazie danych
+    * tworzymy BookFX jako odpowiednik klasy Book ktora znajduje sie do obslugi samej bazy danych i przypisujemy jej property do
+    * kazdej zmiennej znajdujacej sie w bazie Integer, Sting Object itd
+    * tworzymy gettery settery do wszystkiego
+    * nastpenie tworzymy klase BookModel i tworzymy ObjectProperty do klasy bookFx
+    * private ObjectProperty<BookFx> bookFxObjectProperty = new SimpleObjectProperty<>(new BookFx());
+    * koniecznie najwazniejsze dodac nowa klase bookFx parametrach propertki
+    * tworzymy getery settery do wszystkeigo
+    * nastpenie w klasie controllera wsrzytkujemy potrzbene elementy
+    * dodajemy instancje klasy BookModel (BookModel bookModel = new BookModel())
+    * bindujemy kazda wartosc z klasy BookFx z naszymi oknami do sterowania
+    *  this.bookModel.bookFxObjectPropertyProperty().get().authorFxProperty().bind(this.authorComboBox.valueProperty());
+
+    * */
+
+
+
+---------------------------------------------------------------------------------
+
+  /*przypisanie potrzebne dla obslugi ComboBoxa
+    * otwiedzmay polaczenie z baza dancyh nastepnie tworzymy lsite obiektow klasy z bazy danych
+    * i szukamy po wszystkich obietkach
+    * czyscimy ObservableList klasy CategoryFX
+    * dla wszytkich obiektow tworzymy nowy obiekt klasy CategoryFx i uzywajac konwertego konwertujemy go
+    * dodajemy do listy categoryFX ObservableList
+    * wyjatki przekazujemy dalej az by moc je obsluzyc w klasie kontrollera
+    * zamykamy połączenie
+    *
+    * nastepnie w klasie controller
+    * //wypelnienie comboboxow lista z modelu
+        this.categoryComboBox.setItems(this.bookModel.getCategoryFxObservableList());
+        this.authorComboBox.setItems(this.bookModel.getAuthorFxObservableList());
+
+    *
+    * */

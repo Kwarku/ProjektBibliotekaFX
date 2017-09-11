@@ -5,29 +5,19 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import pl.biblioteka.projekt.database.dao.AuthorDao;
+import pl.biblioteka.projekt.database.dao.BookDao;
 import pl.biblioteka.projekt.database.dao.CategoryDao;
 import pl.biblioteka.projekt.database.models.Author;
+import pl.biblioteka.projekt.database.models.Book;
 import pl.biblioteka.projekt.database.models.Category;
 import pl.biblioteka.projekt.utils.converters.AuthorConverter;
+import pl.biblioteka.projekt.utils.converters.BookConverter;
 import pl.biblioteka.projekt.utils.converters.CategoryConverter;
 import pl.biblioteka.projekt.utils.exceptions.ApplicationException;
 
 import java.util.List;
 
-/*Dodanie obslugi klasy w bazie danych
-    * tworzymy BookFX jako odpowiednik klasy Book ktora znajduje sie do obslugi samej bazy danych i przypisujemy jej property do
-    * kazdej zmiennej znajdujacej sie w bazie Integer, Sting Object itd
-    * tworzymy gettery settery do wszystkiego
-    * nastpenie tworzymy klase BookModel i tworzymy ObjectProperty do klasy bookFx
-    * private ObjectProperty<BookFx> bookFxObjectProperty = new SimpleObjectProperty<>(new BookFx());
-    * koniecznie najwazniejsze dodac nowa klase bookFx parametrach propertki
-    * tworzymy getery settery do wszystkeigo
-    * nastpenie w klasie controllera wsrzytkujemy potrzbene elementy
-    * dodajemy instancje klasy BookModel (BookModel bookModel = new BookModel())
-    * bindujemy kazda wartosc z klasy BookFx z naszymi oknami do sterowania
-    *  this.bookModel.bookFxObjectPropertyProperty().get().authorFxProperty().bind(this.authorComboBox.valueProperty());
 
-    * */
 public class BookModel {
 
     private ObjectProperty<BookFx> bookFxObjectProperty = new SimpleObjectProperty<>(new BookFx());
@@ -42,14 +32,25 @@ public class BookModel {
 
     }
 
-    /*przypisanie potrzebne dla obslugi ComboBoxa
-    * otwiedzmay polaczenie z baza dancyh nastepnie tworzymy lsite obiektow klasy z bazy danych
-    * i szukamy po wszystkich obietkach
-    * czyscimy ObservableList klasy CategoryFX
-    * dla wszytkich obiektow tworzymy nowy obiekt klasy CategoryFx i uzywajac konwertego konwertujemy go
-    * dodajemy do listy categoryFX ObservableList
-    * wyjatki przekazujemy dalej az by moc je obsluzyc w klasie kontrollera
-    * zamykamy połączenie */
+    public void saveBookInDatabase() throws ApplicationException {
+        //uzywamy konwertera ksiazki do zapiasnia ksiazki do bazy danych
+        Book book = BookConverter.convertToBook(this.getBookFxObjectProperty());
+
+        // powolujemy nowy obiekt category dao nastepnie mu ksiazki z categorii bazodanowej
+        CategoryDao categoryDao = new CategoryDao();
+        Category category = categoryDao.findByID(Category.class, this.getBookFxObjectProperty().getCategoryFx().getId());
+        book.setCategory(category);
+
+        AuthorDao authorDao = new AuthorDao();
+        Author author = authorDao.findByID(Author.class, this.getBookFxObjectProperty().getAuthorFx().getId());
+        book.setAuthor(author);
+
+        // stworznie ksiazki w bazie dancyh
+        BookDao bookDao = new BookDao();
+        bookDao.creatOrUpdate(book);
+
+    }
+
     private void initCategoryList() throws ApplicationException {
         CategoryDao categoryDao = new CategoryDao();
         List<Category> categoryList = categoryDao.queryForAll(Category.class);

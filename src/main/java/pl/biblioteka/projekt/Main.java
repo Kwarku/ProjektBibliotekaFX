@@ -5,8 +5,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pl.biblioteka.projekt.database.dbutils.DbManager;
+import pl.biblioteka.projekt.utils.FillDatabase;
 import pl.biblioteka.projekt.utils.FxmlUtils;
-import pl.biblioteka.projekt.utils.exceptions.FillDatabase;
 
 
 public class Main extends Application {

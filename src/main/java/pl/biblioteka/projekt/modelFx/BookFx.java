@@ -13,7 +13,7 @@ public class BookFx {
     private ObjectProperty<LocalDate> releaseDate = new SimpleObjectProperty<>();
     private StringProperty isbn = new SimpleStringProperty();
     private IntegerProperty note = new SimpleIntegerProperty();
-    private ObjectProperty<LocalDate> addedDate = new SimpleObjectProperty<>();
+    private ObjectProperty<LocalDate> addedDate = new SimpleObjectProperty<>(LocalDate.now());
 
     public int getId() {
         return id.get();

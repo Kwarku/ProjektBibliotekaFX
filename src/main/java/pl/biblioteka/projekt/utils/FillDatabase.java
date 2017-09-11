@@ -1,16 +1,17 @@
-package pl.biblioteka.projekt.utils.exceptions;
+package pl.biblioteka.projekt.utils;
 
 import pl.biblioteka.projekt.database.dao.BookDao;
 import pl.biblioteka.projekt.database.models.Author;
 import pl.biblioteka.projekt.database.models.Book;
 import pl.biblioteka.projekt.database.models.Category;
+import pl.biblioteka.projekt.utils.exceptions.ApplicationException;
 
 import java.util.Date;
 
 public class FillDatabase {
     public static void fillDatabase(){
         Category category1 = new Category();
-        category1.setName("Komidia");
+        category1.setName("Komedia");
         Category category2 = new Category();
         category2.setName("Dramat");
         Category category3 = new Category();
