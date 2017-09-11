@@ -1,10 +1,7 @@
 package pl.biblioteka.projekt.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import pl.biblioteka.projekt.modelFx.AuthorFx;
 import pl.biblioteka.projekt.modelFx.AuthorModel;
@@ -31,6 +28,9 @@ public class AuthorController {
     @FXML
     private TableColumn<AuthorFx, String> surnameColumn;
 
+    @FXML
+    private MenuItem deleteAuthorMenuItem;
+
     private AuthorModel authorModel;
 
     @FXML
@@ -42,12 +42,14 @@ public class AuthorController {
             DialogUtils.errorDialog(e.getMessage());
         }
 
-        // bindowanie tkestu z pola tekstowego do modelu polaczonego z baza dancyh
-        this.authorModel.authorFxObjectPropertyProperty().get().nameProperty().bind(this.authorNameTextField.textProperty());
-        this.authorModel.authorFxObjectPropertyProperty().get().surnameProperty().bind(this.authorSurnameTextField.textProperty());
 
-        this.addAuthorButton.disableProperty().bind(this.authorNameTextField.textProperty().isEmpty().or(this.authorSurnameTextField.textProperty().isEmpty()));
+        bindings();
+        bindingsTableView();
 
+
+    }
+
+    private void bindingsTableView() {
         authorTableView.setItems(this.authorModel.getAuthorFxObservableList());
         this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         this.surnameColumn.setCellValueFactory(cellData -> cellData.getValue().surnameProperty());
@@ -56,9 +58,15 @@ public class AuthorController {
         this.surnameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
         this.authorTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
-            this.authorModel.setAuthorFxObjectPropertyEdit(newValue));
+                this.authorModel.setAuthorFxObjectPropertyEdit(newValue));
+    }
 
+    private void bindings() {
+        this.authorModel.authorFxObjectPropertyProperty().get().nameProperty().bind(this.authorNameTextField.textProperty());
+        this.authorModel.authorFxObjectPropertyProperty().get().surnameProperty().bind(this.authorSurnameTextField.textProperty());
 
+        this.addAuthorButton.disableProperty().bind(this.authorNameTextField.textProperty().isEmpty().or(this.authorSurnameTextField.textProperty().isEmpty()));
+        this.deleteAuthorMenuItem.disableProperty().bind(this.authorTableView.getSelectionModel().selectedItemProperty().isNull());
     }
 
     @FXML
@@ -90,6 +98,14 @@ public class AuthorController {
     private void updateInDatabase() {
         try {
             this.authorModel.saveAuthorEditInDataBase();
+        } catch (ApplicationException e) {
+            DialogUtils.errorDialog(e.getMessage());
+        }
+    }
+
+    public void deleteAuthorOnAction() {
+        try {
+            this.authorModel.deleteAuthorInDatabase();
         } catch (ApplicationException e) {
             DialogUtils.errorDialog(e.getMessage());
         }

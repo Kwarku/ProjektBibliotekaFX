@@ -56,7 +56,7 @@ public class FillDatabase {
         book3.setAddedDate(new Date());
 
         Author author4 = new Author();
-        author4.setName("Tomasz");
+        author4.setName("Jacek Placek");
         author4.setSurname("Dukaj");
         Book book4 = new Book();
         book4.setCategory(category4);
