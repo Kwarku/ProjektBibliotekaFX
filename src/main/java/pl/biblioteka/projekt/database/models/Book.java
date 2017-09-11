@@ -16,10 +16,12 @@ public class Book implements BaseModel {
     private Category category;
     @DatabaseField(columnName = "TITLE", canBeNull = false)
     private String title;
+    @DatabaseField(columnName = "DESCRIPTION")
+    private String description;
     @DatabaseField(columnName = "RELEASE_DATE")
     private Date releaseDate;
     @DatabaseField(columnName = "ISBN")
-    private long isbn;
+    private String isbn;
     @DatabaseField(columnName = "RATING", width = 1)
     private int rating;
     @DatabaseField(columnName = "ADDED_DATE")
@@ -68,11 +70,11 @@ public class Book implements BaseModel {
         this.releaseDate = releaseDate;
     }
 
-    public long getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(long isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
@@ -90,5 +92,13 @@ public class Book implements BaseModel {
 
     public void setAddedDate(Date addedDate) {
         this.addedDate = addedDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -49,6 +49,6 @@ public class AuthorFx {
 
     @Override
     public String toString() {
-        return name + " " + surname;
+        return getName() + " " + getSurname();
     }
 }
