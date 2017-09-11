@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 import pl.biblioteka.projekt.database.dao.CategoryDao;
-import pl.biblioteka.projekt.database.dbutils.DbManager;
 import pl.biblioteka.projekt.database.models.Category;
 import pl.biblioteka.projekt.utils.converters.CategoryConverter;
 import pl.biblioteka.projekt.utils.exceptions.ApplicationException;
@@ -23,11 +22,10 @@ public class CategoryModel {
 
     // metoda ktora wypelni combobox category danymi z bazy danych
     public void init() throws ApplicationException {
-        CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
+        CategoryDao categoryDao = new CategoryDao();
         List<Category> categories = categoryDao.queryForAll(Category.class);
         initCategoryList(categories);
         initRoot(categories);
-        DbManager.closeConnectionSource();
 
 
     }
@@ -42,9 +40,7 @@ public class CategoryModel {
         this.root.getChildren().clear();
         categories.forEach(c -> {
             TreeItem<String> categoryItem = new TreeItem<>(c.getName());
-            c.getBooks().forEach(b -> {
-                categoryItem.getChildren().add(new TreeItem<>(b.getTitle()));
-            });
+            c.getBooks().forEach(b -> categoryItem.getChildren().add(new TreeItem<>(b.getTitle())));
             root.getChildren().add(categoryItem);
         });
     }
@@ -58,32 +54,29 @@ public class CategoryModel {
     }
 
     public void deleteCategoryByID() throws ApplicationException {
-        CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
+        CategoryDao categoryDao = new CategoryDao();
         // odnosi sie do metody z klasy abstrakcyjnej i usuwa obikt o podanym id z listy
         categoryDao.deleteByID(Category.class, category.getValue().getId());
-        DbManager.closeConnectionSource();
         init();
     }
 
     public void saveCategoryInDataBase(String name) throws ApplicationException {
-        CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
+        CategoryDao categoryDao = new CategoryDao();
         Category category = new Category();
         category.setName(name);
         categoryDao.creatOrUpdate(category);
-        DbManager.closeConnectionSource();
         //jeszcze raz wywolujemy metode init ktora pobiera liste i odswierza niejako wypisane obiekty w comboboxie
         init();
     }
 
     // szuka obiektow po id nastepnie je zmienia nastepnie updateuje
     public void updateCategoryInDataBase() throws ApplicationException {
-        CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
+        CategoryDao categoryDao = new CategoryDao();
         Category tempCategory = categoryDao.findByID(Category.class, getCategory().getId());
         tempCategory.setName(getCategory().getName());
         categoryDao.creatOrUpdate(tempCategory);
 
 
-        DbManager.closeConnectionSource();
         init();
 
     }

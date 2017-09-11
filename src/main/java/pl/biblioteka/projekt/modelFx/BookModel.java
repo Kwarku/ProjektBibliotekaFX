@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import pl.biblioteka.projekt.database.dao.AuthorDao;
 import pl.biblioteka.projekt.database.dao.CategoryDao;
-import pl.biblioteka.projekt.database.dbutils.DbManager;
 import pl.biblioteka.projekt.database.models.Author;
 import pl.biblioteka.projekt.database.models.Category;
 import pl.biblioteka.projekt.utils.converters.AuthorConverter;
@@ -52,7 +51,7 @@ public class BookModel {
     * wyjatki przekazujemy dalej az by moc je obsluzyc w klasie kontrollera
     * zamykamy połączenie */
     private void initCategoryList() throws ApplicationException {
-        CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
+        CategoryDao categoryDao = new CategoryDao();
         List<Category> categoryList = categoryDao.queryForAll(Category.class);
         categoryFxObservableList.clear();
         categoryList.forEach(category -> {
@@ -60,11 +59,10 @@ public class BookModel {
             categoryFxObservableList.add(categoryFx);
         });
 
-        DbManager.closeConnectionSource();
     }
 
     private void initAuthorList() throws ApplicationException {
-        AuthorDao authorDao = new AuthorDao(DbManager.getConnectionSource());
+        AuthorDao authorDao = new AuthorDao();
         List<Author> authorList = authorDao.queryForAll(Author.class);
         authorFxObservableList.clear();
         authorList.forEach(author -> {
@@ -73,7 +71,6 @@ public class BookModel {
         });
 
 
-        DbManager.closeConnectionSource();
     }
 
     public BookFx getBookFxObjectProperty() {

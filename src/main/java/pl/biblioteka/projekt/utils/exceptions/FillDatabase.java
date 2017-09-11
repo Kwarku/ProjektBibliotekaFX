@@ -1,7 +1,6 @@
 package pl.biblioteka.projekt.utils.exceptions;
 
 import pl.biblioteka.projekt.database.dao.BookDao;
-import pl.biblioteka.projekt.database.dbutils.DbManager;
 import pl.biblioteka.projekt.database.models.Author;
 import pl.biblioteka.projekt.database.models.Book;
 import pl.biblioteka.projekt.database.models.Category;
@@ -72,7 +71,7 @@ public class FillDatabase {
         book4.setAddedDate(new Date());
 
 
-        BookDao bookDao = new BookDao(DbManager.getConnectionSource());
+        BookDao bookDao = new BookDao();
 
         try {
             bookDao.creatOrUpdate(book1);
