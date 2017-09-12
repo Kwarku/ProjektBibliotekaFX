@@ -56,7 +56,7 @@ public class BookController {
         this.bookModel.bookFxObjectPropertyProperty().get().titleProperty().bind(bookTitleTextField.textProperty());
         this.bookModel.bookFxObjectPropertyProperty().get().descriptionProperty().bind(this.bookDescriptionTextArea.textProperty());
         this.bookModel.bookFxObjectPropertyProperty().get().isbnProperty().bind(this.bookIsbnTextField.textProperty());
-        this.bookModel.bookFxObjectPropertyProperty().get().noteProperty().bind(this.bookNoteSlider.valueProperty());
+        this.bookModel.bookFxObjectPropertyProperty().get().ratingProperty().bind(this.bookNoteSlider.valueProperty());
         this.bookModel.bookFxObjectPropertyProperty().get().releaseDateProperty().bind(this.bookReleaseDatePicker.valueProperty());
     }
 

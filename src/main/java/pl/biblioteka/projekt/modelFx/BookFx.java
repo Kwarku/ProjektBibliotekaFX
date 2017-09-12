@@ -12,7 +12,7 @@ public class BookFx {
     private StringProperty description = new SimpleStringProperty();
     private ObjectProperty<LocalDate> releaseDate = new SimpleObjectProperty<>();
     private StringProperty isbn = new SimpleStringProperty();
-    private IntegerProperty note = new SimpleIntegerProperty();
+    private IntegerProperty rating = new SimpleIntegerProperty();
     private ObjectProperty<LocalDate> addedDate = new SimpleObjectProperty<>(LocalDate.now());
 
     public int getId() {
@@ -87,16 +87,16 @@ public class BookFx {
         this.isbn.set(isbn);
     }
 
-    public int getNote() {
-        return note.get();
+    public int getRating() {
+        return rating.get();
     }
 
-    public IntegerProperty noteProperty() {
-        return note;
+    public IntegerProperty ratingProperty() {
+        return rating;
     }
 
-    public void setNote(int note) {
-        this.note.set(note);
+    public void setRating(int rating) {
+        this.rating.set(rating);
     }
 
     public LocalDate getReleaseDate() {
@@ -133,7 +133,7 @@ public class BookFx {
                 ", description=" + description.get() +
                 ", releaseDate=" + releaseDate.get() +
                 ", isbn=" + isbn.get() +
-                ", note=" + note.get() +
+                ", rating=" + rating.get() +
                 ", addedDate=" + addedDate.get() +
                 '}';
     }

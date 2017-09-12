@@ -11,4 +11,7 @@ public class Utils {
     }
 
 
+    public static LocalDate converteToLocalDate(Date date) {
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
 }
