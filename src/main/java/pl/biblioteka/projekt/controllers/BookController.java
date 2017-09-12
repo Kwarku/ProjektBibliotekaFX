@@ -45,7 +45,7 @@ public class BookController {
             DialogUtils.errorDialog(e.getMessage());
         }
         bindings();
-
+        blockButtonClick();
     }
 
     @FXML
@@ -56,7 +56,7 @@ public class BookController {
             DialogUtils.errorDialog(e.getMessage());
         }
         cleanValues();
-        blockButtonClick();
+
 
 
     }

@@ -1,6 +1,7 @@
 package pl.biblioteka.projekt.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import pl.biblioteka.projekt.modelFx.AuthorFx;
@@ -13,6 +14,13 @@ import pl.biblioteka.projekt.utils.exceptions.ApplicationException;
 import java.time.LocalDate;
 
 public class BookListController {
+
+    @FXML
+    private ComboBox<CategoryFx> categoryComboBox;
+
+    @FXML
+    private ComboBox<AuthorFx> authorComboBox;
+
 
     @FXML
     private TableView<BookFx> booksTableView;
@@ -49,9 +57,17 @@ public class BookListController {
             DialogUtils.errorDialog(e.getMessage());
         }
 
-        /*bindowanie z bazdy dancyh do wyswietlania w table View */
 
+        this.categoryComboBox.setItems(this.bookListModel.getCategoryFxObservableList());
+        this.authorComboBox.setItems(this.bookListModel.getAuthorFxObservableList());
+
+        //wybranie czegos z combo boxa jest to zapisywane od razu w
+        this.bookListModel.categoryFxObjectPropertyProperty().bind(this.categoryComboBox.valueProperty());
+        this.bookListModel.authorFxObjectPropertyProperty().bind(this.authorComboBox.valueProperty());
+
+        /*bindowanie z bazdy dancyh do wyswietlania w table View */
         this.booksTableView.setItems(this.bookListModel.getBookFxObservableList());
+
         this.titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
         this.descColumn.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
         this.authorColumn.setCellValueFactory(cellData -> cellData.getValue().authorFxProperty());
@@ -60,5 +76,9 @@ public class BookListController {
         this.isbnColumn.setCellValueFactory(cellData -> cellData.getValue().isbnProperty());
         this.releaseDateColumn.setCellValueFactory(cellData -> cellData.getValue().releaseDateProperty());
 
+    }
+
+    public void filterOnActionComboBox() {
+        System.out.println(this.bookListModel.categoryFxObjectPropertyProperty().get());
     }
 }
