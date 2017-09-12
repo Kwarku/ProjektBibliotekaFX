@@ -11,6 +11,9 @@ import pl.biblioteka.projekt.utils.exceptions.ApplicationException;
 public class BookController {
 
     @FXML
+    private Button addButton;
+
+    @FXML
     private ComboBox<CategoryFx> categoryComboBox;
 
     @FXML
@@ -43,6 +46,18 @@ public class BookController {
         }
         bindings();
 
+    }
+
+    @FXML
+    void addBookOnAction() {
+        try {
+            this.bookModel.saveBookInDatabase();
+        } catch (ApplicationException e) {
+            DialogUtils.errorDialog(e.getMessage());
+        }
+        cleanValues();
+        blockButtonClick();
+
 
     }
 
@@ -58,16 +73,25 @@ public class BookController {
         this.bookModel.bookFxObjectPropertyProperty().get().isbnProperty().bind(this.bookIsbnTextField.textProperty());
         this.bookModel.bookFxObjectPropertyProperty().get().ratingProperty().bind(this.bookNoteSlider.valueProperty());
         this.bookModel.bookFxObjectPropertyProperty().get().releaseDateProperty().bind(this.bookReleaseDatePicker.valueProperty());
+
     }
 
-    @FXML
-    void addBookOnAction() {
-        try {
-            this.bookModel.saveBookInDatabase();
-        } catch (ApplicationException e) {
-            DialogUtils.errorDialog(e.getMessage());
-        }
+    private void blockButtonClick() {
+        this.addButton.disableProperty().bind(this.bookIsbnTextField.textProperty().isEmpty()
+                .or(this.bookIsbnTextField.textProperty().isEmpty())
+                .or(this.authorComboBox.valueProperty().isNull())
+                .or(this.categoryComboBox.valueProperty().isNull())
+                .or(this.bookReleaseDatePicker.valueProperty().isNull()));
+    }
 
+    private void cleanValues() {
+        authorComboBox.setValue(null);
+        categoryComboBox.setValue(null);
+        bookTitleTextField.clear();
+        bookDescriptionTextArea.clear();
+        bookIsbnTextField.clear();
+        bookNoteSlider.setValue(bookNoteSlider.getMin());
+        bookReleaseDatePicker.setValue(null);
     }
 
 }
