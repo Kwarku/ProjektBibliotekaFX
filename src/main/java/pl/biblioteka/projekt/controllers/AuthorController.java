@@ -8,6 +8,8 @@ import pl.biblioteka.projekt.modelFx.AuthorModel;
 import pl.biblioteka.projekt.utils.DialogUtils;
 import pl.biblioteka.projekt.utils.exceptions.ApplicationException;
 
+import java.sql.SQLException;
+
 public class AuthorController {
 
     @FXML
@@ -106,7 +108,7 @@ public class AuthorController {
     public void deleteAuthorOnAction() {
         try {
             this.authorModel.deleteAuthorInDatabase();
-        } catch (ApplicationException e) {
+        } catch (ApplicationException | SQLException e) {
             DialogUtils.errorDialog(e.getMessage());
         }
     }

@@ -102,7 +102,7 @@ public abstract class CommonDao {
     }
 
 
-    private  <T extends BaseModel, I> Dao<T, I> getDao(Class<T> cls) throws ApplicationException {
+    public <T extends BaseModel, I> Dao<T, I> getDao(Class<T> cls) throws ApplicationException {
         try {
             return DaoManager.createDao(connectionSource, cls);
         } catch (SQLException e) {

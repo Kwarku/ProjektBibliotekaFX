@@ -33,10 +33,7 @@ public class BookController {
     private DatePicker bookReleaseDatePicker;
 
     @FXML
-    public Button addButton;
-
-    @FXML
-    public Button editButton;
+    private Button addButton;
 
 
     private BookModel bookModel;
@@ -50,7 +47,7 @@ public class BookController {
             DialogUtils.errorDialog(e.getMessage());
         }
         bindings();
-        blockButtonClick();
+        validation();
 
 
     }
@@ -63,15 +60,12 @@ public class BookController {
             DialogUtils.errorDialog(e.getMessage());
         }
 
-//        cleanValues();
+        cleanValues();
 
 
     }
 
-    @FXML
-    private void editBookOnAction() {
-        System.out.println("edytuje ksaizke");
-    }
+
 
     public void bindings() {
 
@@ -88,19 +82,9 @@ public class BookController {
         this.bookReleaseDatePicker.valueProperty().bindBidirectional(this.bookModel.bookFxObjectPropertyProperty().get().releaseDateProperty());
 
 
-       /*  zmiana bindowania z jednostronnego na dwustronne
-        //bindowanie elementeow z bookModel i bookfx
-        this.bookModel.bookFxObjectPropertyProperty().get().authorFxProperty().bind(this.authorComboBox.valueProperty());
-        this.bookModel.bookFxObjectPropertyProperty().get().categoryFxProperty().bind(this.categoryComboBox.valueProperty());
-        this.bookModel.bookFxObjectPropertyProperty().get().titleProperty().bind(this.bookTitleTextField.textProperty());
-        this.bookModel.bookFxObjectPropertyProperty().get().descriptionProperty().bind(this.bookDescriptionTextArea.textProperty());
-        this.bookModel.bookFxObjectPropertyProperty().get().isbnProperty().bind(this.bookIsbnTextField.textProperty());
-        this.bookModel.bookFxObjectPropertyProperty().get().ratingProperty().bind(this.bookNoteSlider.valueProperty());
-        this.bookModel.bookFxObjectPropertyProperty().get().releaseDateProperty().bind(this.bookReleaseDatePicker.valueProperty());
-    */
     }
 
-    private void blockButtonClick() {
+    private void validation() {
         this.addButton.disableProperty().bind(this.bookIsbnTextField.textProperty().isEmpty()
                 .or(this.bookIsbnTextField.textProperty().isEmpty())
                 .or(this.authorComboBox.valueProperty().isNull())
@@ -108,14 +92,14 @@ public class BookController {
                 .or(this.bookReleaseDatePicker.valueProperty().isNull()));
     }
 
-    public void cleanValues() {
-        authorComboBox.setValue(null);
-        categoryComboBox.setValue(null);
-        bookTitleTextField.clear();
-        bookDescriptionTextArea.clear();
-        bookIsbnTextField.clear();
-        bookNoteSlider.setValue(bookNoteSlider.getMin());
-        bookReleaseDatePicker.setValue(null);
+    private void cleanValues() {
+        this.authorComboBox.getSelectionModel().clearSelection();
+        this.categoryComboBox.getSelectionModel().clearSelection();
+        this.bookTitleTextField.clear();
+        this.bookDescriptionTextArea.clear();
+        this.bookIsbnTextField.clear();
+        this.bookNoteSlider.setValue(1);
+        this.bookReleaseDatePicker.getEditor().clear();
 
     }
 

@@ -156,6 +156,11 @@ public class BookListController {
                         stage.initModality(Modality.APPLICATION_MODAL);
                         stage.showAndWait();
 
+                        try {
+                            bookListModel.init();
+                        } catch (ApplicationException e) {
+                            DialogUtils.errorDialog(e.getMessage());
+                        }
                     });
                 }
             }

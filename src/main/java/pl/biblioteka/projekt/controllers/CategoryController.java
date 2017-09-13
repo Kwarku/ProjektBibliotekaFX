@@ -11,6 +11,8 @@ import pl.biblioteka.projekt.modelFx.CategoryModel;
 import pl.biblioteka.projekt.utils.DialogUtils;
 import pl.biblioteka.projekt.utils.exceptions.ApplicationException;
 
+import java.sql.SQLException;
+
 public class CategoryController {
 
     @FXML
@@ -70,7 +72,7 @@ public class CategoryController {
     public void deleteCategoryOnAction() {
         try {
             categoryModel.deleteCategoryByID();
-        } catch (ApplicationException e) {
+        } catch (ApplicationException | SQLException e) {
             DialogUtils.errorDialog(e.getMessage());
         }
     }

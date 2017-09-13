@@ -5,11 +5,14 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
+import pl.biblioteka.projekt.database.dao.BookDao;
 import pl.biblioteka.projekt.database.dao.CategoryDao;
+import pl.biblioteka.projekt.database.models.Book;
 import pl.biblioteka.projekt.database.models.Category;
 import pl.biblioteka.projekt.utils.converters.CategoryConverter;
 import pl.biblioteka.projekt.utils.exceptions.ApplicationException;
 
+import java.sql.SQLException;
 import java.util.List;
 
 // obsluga logiki ktory jest warstwa posrednia miedzy javafx a baza danych
@@ -53,10 +56,12 @@ public class CategoryModel {
         });
     }
 
-    public void deleteCategoryByID() throws ApplicationException {
+    public void deleteCategoryByID() throws ApplicationException, SQLException {
         CategoryDao categoryDao = new CategoryDao();
         // odnosi sie do metody z klasy abstrakcyjnej i usuwa obikt o podanym id z listy
         categoryDao.deleteByID(Category.class, category.getValue().getId());
+        BookDao bookDao = new BookDao();
+        bookDao.deleteColumnByName(Book.CATEGORY_ID,category.getValue().getId());
         init();
     }
 
