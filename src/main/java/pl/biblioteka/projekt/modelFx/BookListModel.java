@@ -15,7 +15,10 @@ import pl.biblioteka.projekt.utils.converters.BookConverter;
 import pl.biblioteka.projekt.utils.converters.CategoryConverter;
 import pl.biblioteka.projekt.utils.exceptions.ApplicationException;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class BookListModel {
 
@@ -27,14 +30,36 @@ public class BookListModel {
     private ObjectProperty<CategoryFx> categoryFxObjectProperty = new SimpleObjectProperty<>();
     private ObjectProperty<AuthorFx> authorFxObjectProperty = new SimpleObjectProperty<>();
 
+    private List<BookFx> bookFxList = new ArrayList<>();
 
     public void init() throws ApplicationException {
         BookDao bookDao = new BookDao();
         List<Book> books = bookDao.queryForAll(Book.class);
-        books.forEach(book -> this.bookFxObservableList.add(BookConverter.convertToBookFx(book)));
+        bookFxList.clear();
+        books.forEach(book -> this.bookFxList.add(BookConverter.convertToBookFx(book)));
+        this.bookFxObservableList.setAll(bookFxList);
 
         initCategoryList();
         initAuthorList();
+
+    }
+
+    public void deleteBook(BookFx bookFx) throws ApplicationException {
+        BookDao bookDao = new BookDao();
+        bookDao.deleteByID(Book.class, bookFx.getId());
+        init();
+    }
+
+    public void filterBookList() {
+        if (getAuthorFxObjectProperty() != null && getCategoryFxObjectProperty() != null) {
+            filterPredicate(predicateAuthorFx().and(predicateCategoryFx()));
+        } else if (getCategoryFxObjectProperty() != null) {
+            filterPredicate(predicateCategoryFx());
+        } else if (getAuthorFxObjectProperty() != null) {
+            filterPredicate(predicateAuthorFx());
+        } else {
+            this.bookFxObservableList.setAll(bookFxList);
+        }
 
     }
 
@@ -56,6 +81,19 @@ public class BookListModel {
             AuthorFx authorFx = AuthorConverter.convertToAuthorFx(author);
             authorFxObservableList.add(authorFx);
         });
+    }
+
+    private Predicate<BookFx> predicateCategoryFx() {
+        return bookFx -> bookFx.getCategoryFx().getId() == getCategoryFxObjectProperty().getId();
+    }
+
+    private Predicate<BookFx> predicateAuthorFx() {
+        return bookFx -> bookFx.getAuthorFx().getId() == getAuthorFxObjectProperty().getId();
+    }
+
+    private void filterPredicate(Predicate<BookFx> predicate) {
+        List<BookFx> newList = bookFxList.stream().filter(predicate).collect(Collectors.toList());
+        this.bookFxObservableList.setAll(newList);
     }
 
     public ObservableList<BookFx> getBookFxObservableList() {

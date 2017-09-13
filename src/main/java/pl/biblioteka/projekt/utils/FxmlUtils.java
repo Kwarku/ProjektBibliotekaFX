@@ -20,6 +20,14 @@ public class FxmlUtils {
         return null;
     }
 
+    public static FXMLLoader getLoader(String fxmlPath) {
+        FXMLLoader loader = new FXMLLoader(FxmlUtils.class.getClass().getResource(fxmlPath));
+        loader.setResources(getResourceBundle());
+
+        return loader;
+
+    }
+
     public static ResourceBundle getResourceBundle() {
         return ResourceBundle.getBundle("bundles.messages");
     }
