@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.HBox?>
-<HBox spacing="10.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
+<HBox xmlns:fx="http://javafx.com/fxml/1" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.111"
       fx:controller="pl.biblioteka.projekt.controllers.TopMenuButtonsController">
     <ToggleButton contentDisplay="TOP" mnemonicParsing="false" onAction="#openList" prefHeight="80.0" prefWidth="150.0"
                   text="%list.books">
