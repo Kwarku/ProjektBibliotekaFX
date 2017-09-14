@@ -27,13 +27,12 @@ public class MainController {
         topMenuButtonsController.setMainController(this);
     }
 
-    public void setCenter(String fxmlPath) {
+    void setCenter(String fxmlPath) {
 
         borderPane.setCenter(FxmlUtils.fxmlLoader(fxmlPath));
 
     }
 
-    // zamkniecie aplikacji
     @FXML
     public void closeApplication() {
         Optional<ButtonType> result = DialogUtils.confirmationDialog();
@@ -44,7 +43,6 @@ public class MainController {
 
     }
 
-    //zmiana stylu na style domyslne
     @FXML
     public void setModena() {
         Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
@@ -55,7 +53,6 @@ public class MainController {
         Application.setUserAgentStylesheet(Application.STYLESHEET_CASPIAN);
     }
 
-    // dostanie sie do stage i ustawienie opcji zawsze na wierzchu  dzieki property
     @FXML
     public void setAlwaysOnTop(ActionEvent actionEvent) {
         Stage stage = (Stage) borderPane.getScene().getWindow();

@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 
 public class DialogUtils {
 
-    static ResourceBundle bundle = FxmlUtils.getResourceBundle();
+    private static ResourceBundle bundle = FxmlUtils.getResourceBundle();
 
     public static void dialogAboutApplication() {
         Alert informationAlert = new Alert(Alert.AlertType.INFORMATION);
@@ -22,15 +22,21 @@ public class DialogUtils {
     }
 
     public static Optional<ButtonType> confirmationDialog() {
-        Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmationDialog.setTitle(bundle.getString("exit.title"));
-        confirmationDialog.setHeaderText(bundle.getString("exit.header"));
-
-        Optional<ButtonType> result = confirmationDialog.showAndWait();
-        return result;
+        return getButtonType(bundle.getString("exit.title"), bundle.getString("exit.header"));
     }
 
-    // okno bledu ktore bedzie obslugiwalo wszyustkie bledy w calej aplikacji
+    public static Optional<ButtonType> deleteConfirmationDialog() {
+        return getButtonType(bundle.getString("delete.title"), bundle.getString("delete.header"));
+    }
+
+    private static Optional<ButtonType> getButtonType(String title, String header) {
+        Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationDialog.setTitle(title);
+        confirmationDialog.setHeaderText(header);
+
+        return confirmationDialog.showAndWait();
+    }
+
     public static void errorDialog(String error) {
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         errorAlert.setTitle(bundle.getString("error.title"));
@@ -42,7 +48,6 @@ public class DialogUtils {
         errorAlert.showAndWait();
     }
 
-    //okno komunikacji
     public static String editDialog(String value) {
         TextInputDialog dialog = new TextInputDialog(value);
         dialog.setTitle(bundle.getString("edit.title"));
@@ -50,10 +55,7 @@ public class DialogUtils {
         dialog.setContentText(bundle.getString("edit.content"));
         // pobieramy stringa i jezeli jest to go zwracamy jezeli nie to zwracamy null
         Optional<String> result = dialog.showAndWait();
-        if (result.isPresent()) {
-            return result.get();
-        }
-        return null;
+        return result.orElse(null);
     }
 }
 

@@ -19,12 +19,15 @@ import pl.biblioteka.projekt.utils.exceptions.ApplicationException;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class BookListController {
 
 
     private static final String ICONS_DELETE_PNG = "/icons/delete.png";
     private static final String ICONS_EDIT_PNG = "/icons/edit.png";
+
+    private static final String EDIT_BOOK_FXML = "/fxml/EditBook.fxml";
 
     @FXML
     private ComboBox<CategoryFx> categoryComboBox;
@@ -69,13 +72,21 @@ public class BookListController {
     @FXML
     private void initialize() {
         this.bookListModel = new BookListModel();
+        initBookListModel();
+        bindings();
+        deleteColumnBindings();
+        editColumnBindings();
+    }
+
+    private void initBookListModel() {
         try {
             this.bookListModel.init();
         } catch (ApplicationException e) {
             DialogUtils.errorDialog(e.getMessage());
         }
+    }
 
-
+    private void bindings() {
         this.categoryComboBox.setItems(this.bookListModel.getCategoryFxObservableList());
         this.authorComboBox.setItems(this.bookListModel.getAuthorFxObservableList());
 
@@ -96,7 +107,9 @@ public class BookListController {
 
         this.deleteColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue()));
         this.editColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue()));
+    }
 
+    private void deleteColumnBindings() {
         this.deleteColumn.setCellFactory(param -> new TableCell<BookFx, BookFx>() {
             Button button = createButton(ICONS_DELETE_PNG);
 
@@ -106,24 +119,24 @@ public class BookListController {
                 //jezeli jest pusta to nie ustawia przycisku -> potrzebne w odswiezaniu listy
                 if (empty) {
                     setGraphic(null);
-                    return;
-                }
-
-                //jezeli komorka nie jest pust to tworzy nowy przycisk
-                if (!empty) {
+                } else {
                     setGraphic(button);
                     button.setOnAction(event -> {
-                        try {
-                            bookListModel.deleteBook(item);
-                        } catch (ApplicationException e) {
-                            DialogUtils.errorDialog(e.getMessage());
+                        Optional<ButtonType> result = DialogUtils.deleteConfirmationDialog();
+                        if (result.get() == ButtonType.OK) {
+                            try {
+                                bookListModel.deleteBook(item);
+                            } catch (ApplicationException e) {
+                                DialogUtils.errorDialog(e.getMessage());
+                            }
                         }
                     });
                 }
             }
         });
+    }
 
-
+    private void editColumnBindings() {
         this.editColumn.setCellFactory(param -> new TableCell<BookFx, BookFx>() {
             Button button = createButton(ICONS_EDIT_PNG);
 
@@ -133,21 +146,17 @@ public class BookListController {
 
                 if (empty) {
                     setGraphic(null);
-                    return;
-                }
-
-
-                if (!empty) {
+                } else {
                     setGraphic(button);
                     button.setOnAction(event -> {
-                        FXMLLoader loader = FxmlUtils.getLoader("/fxml/AddBook.fxml");
+                        FXMLLoader loader = FxmlUtils.getLoader(EDIT_BOOK_FXML);
                         Scene scene = null;
                         try {
                             scene = new Scene(loader.load());
                         } catch (IOException e) {
                             DialogUtils.errorDialog(e.getMessage());
                         }
-                        BookController controller = loader.getController();
+                        EditBookController controller = loader.getController();
                         controller.getBookModel().setBookFxObjectProperty(item);
                         controller.bindings();
 
@@ -156,16 +165,11 @@ public class BookListController {
                         stage.initModality(Modality.APPLICATION_MODAL);
                         stage.showAndWait();
 
-                        try {
-                            bookListModel.init();
-                        } catch (ApplicationException e) {
-                            DialogUtils.errorDialog(e.getMessage());
-                        }
+                        initBookListModel();
                     });
                 }
             }
         });
-
     }
 
     private Button createButton(String path) {

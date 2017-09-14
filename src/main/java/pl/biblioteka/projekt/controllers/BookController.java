@@ -46,10 +46,9 @@ public class BookController {
         } catch (ApplicationException e) {
             DialogUtils.errorDialog(e.getMessage());
         }
+
         bindings();
         validation();
-
-
     }
 
     @FXML
@@ -61,14 +60,10 @@ public class BookController {
         }
 
         cleanValues();
-
-
     }
 
 
-
-    public void bindings() {
-
+    private void bindings() {
         //wypelnienie comboboxow lista z modelu
         this.categoryComboBox.setItems(this.bookModel.getCategoryFxObservableList());
         this.authorComboBox.setItems(this.bookModel.getAuthorFxObservableList());
@@ -80,8 +75,6 @@ public class BookController {
         this.bookIsbnTextField.textProperty().bindBidirectional(this.bookModel.bookFxObjectPropertyProperty().get().isbnProperty());
         this.bookNoteSlider.valueProperty().bindBidirectional(this.bookModel.bookFxObjectPropertyProperty().get().ratingProperty());
         this.bookReleaseDatePicker.valueProperty().bindBidirectional(this.bookModel.bookFxObjectPropertyProperty().get().releaseDateProperty());
-
-
     }
 
     private void validation() {
@@ -100,10 +93,10 @@ public class BookController {
         this.bookIsbnTextField.clear();
         this.bookNoteSlider.setValue(1);
         this.bookReleaseDatePicker.getEditor().clear();
-
     }
 
     public BookModel getBookModel() {
         return bookModel;
     }
+
 }

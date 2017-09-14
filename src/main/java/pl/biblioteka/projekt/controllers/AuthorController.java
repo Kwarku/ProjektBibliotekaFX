@@ -9,6 +9,7 @@ import pl.biblioteka.projekt.utils.DialogUtils;
 import pl.biblioteka.projekt.utils.exceptions.ApplicationException;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class AuthorController {
 
@@ -43,12 +44,19 @@ public class AuthorController {
         } catch (ApplicationException e) {
             DialogUtils.errorDialog(e.getMessage());
         }
-
-
         bindings();
         bindingsTableView();
+    }
 
-
+    @FXML
+    void addAuthorOnAction() {
+        try {
+            this.authorModel.saveAuthorInDataBase();
+        } catch (ApplicationException e) {
+            DialogUtils.errorDialog(e.getMessage());
+        }
+        this.authorSurnameTextField.clear();
+        this.authorNameTextField.clear();
     }
 
     private void bindingsTableView() {
@@ -71,20 +79,6 @@ public class AuthorController {
         this.deleteAuthorMenuItem.disableProperty().bind(this.authorTableView.getSelectionModel().selectedItemProperty().isNull());
     }
 
-    @FXML
-    void addAuthorOnAction() {
-
-        try {
-            this.authorModel.saveAuthorInDataBase();
-        } catch (ApplicationException e) {
-            DialogUtils.errorDialog(e.getMessage());
-        }
-
-        this.authorSurnameTextField.clear();
-        this.authorNameTextField.clear();
-    }
-
-
     public void onEditCommitName(TableColumn.CellEditEvent<AuthorFx, String> authorFxStringCellEditEvent) {
         this.authorModel.getAuthorFxObjectPropertyEdit().setName(authorFxStringCellEditEvent.getNewValue());
         updateInDatabase();
@@ -106,10 +100,13 @@ public class AuthorController {
     }
 
     public void deleteAuthorOnAction() {
-        try {
-            this.authorModel.deleteAuthorInDatabase();
-        } catch (ApplicationException | SQLException e) {
-            DialogUtils.errorDialog(e.getMessage());
+        Optional<ButtonType> result = DialogUtils.deleteConfirmationDialog();
+        if (result.get() == ButtonType.OK) {
+            try {
+                this.authorModel.deleteAuthorInDatabase();
+            } catch (ApplicationException | SQLException e) {
+                DialogUtils.errorDialog(e.getMessage());
+            }
         }
     }
 }
