@@ -2479,3 +2479,7 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Paw
 	at org.h2.mvstore.FileStore.open(FileStore.java:173)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:347)
 	... 35 more
+2017-09-14 15:53:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Wartość za długa dla kolumny "DESCRIPTION VARCHAR(255)": "'terst terst terst terst terst terst terst terst terst terst terst terst terst terst terst terst terst terst terst terst terst t... (786)"
+Value too long for column "DESCRIPTION VARCHAR(255)": "'terst terst terst terst terst terst terst terst terst terst terst terst terst terst terst terst terst terst terst terst terst t... (786)"; SQL statement:
+INSERT INTO `BOOKS` (`AUTHOR_ID` ,`CATEGORY_ID` ,`TITLE` ,`DESCRIPTION` ,`RELEASE_DATE` ,`ISBN` ,`RATING` ,`ADDED_DATE` ) VALUES (?,?,?,?,?,?,?,?) [22001-196]

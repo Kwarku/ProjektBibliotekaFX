@@ -30,7 +30,8 @@
         <ComboBox fx:id="categoryComboBox" prefWidth="150.0" GridPane.columnIndex="1" />
         <ComboBox fx:id="authorComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <TextField fx:id="bookTitleTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <TextArea fx:id="bookDescriptionTextArea" prefHeight="75.0" prefWidth="266.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <TextArea fx:id="bookDescriptionTextArea" prefHeight="75.0" prefWidth="266.0" wrapText="true"
+                  GridPane.columnIndex="1" GridPane.rowIndex="3"/>
         <Slider fx:id="bookNoteSlider" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
         <TextField fx:id="bookIsbnTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
         <DatePicker fx:id="bookReleaseDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="6" />

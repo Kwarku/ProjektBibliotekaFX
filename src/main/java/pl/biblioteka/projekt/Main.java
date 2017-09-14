@@ -4,6 +4,7 @@ package pl.biblioteka.projekt;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pl.biblioteka.projekt.controllers.MainController;
 import pl.biblioteka.projekt.database.dbutils.DbManager;
 import pl.biblioteka.projekt.utils.FillDatabase;
 import pl.biblioteka.projekt.utils.FxmlUtils;
@@ -11,7 +12,6 @@ import pl.biblioteka.projekt.utils.FxmlUtils;
 
 public class Main extends Application {
 
-    private static final String BORDER_PANE_MAIN_FXML = "/fxml/BorderPaneMain.fxml";
 
     public static void main(String[] args) {
         launch(args);
@@ -22,8 +22,10 @@ public class Main extends Application {
 
 //        Locale.setDefault(new Locale("en"));
 
-        Scene scene = new Scene(FxmlUtils.fxmlLoader(BORDER_PANE_MAIN_FXML));
+        Scene scene = new Scene(FxmlUtils.fxmlLoader("/fxml/BorderPaneMain.fxml"));
+        scene.getStylesheets().add(MainController.BRIGHT_THEME_CSS);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.setTitle(FxmlUtils.getResourceBundle().getString("title.application"));
         primaryStage.show();
 
@@ -31,4 +33,5 @@ public class Main extends Application {
         FillDatabase.fillDatabase();
 
     }
+
 }

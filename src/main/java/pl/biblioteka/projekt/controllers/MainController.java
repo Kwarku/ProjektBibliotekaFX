@@ -16,6 +16,8 @@ import java.util.Optional;
 
 public class MainController {
 
+    public static final String BRIGHT_THEME_CSS = "style/brightTheme.css";
+    private static final String DARK_THEME_CSS = "style/DarkTheme.css";
     @FXML
     private BorderPane borderPane;
 
@@ -25,6 +27,7 @@ public class MainController {
     @FXML
     private void initialize() {
         topMenuButtonsController.setMainController(this);
+        setCenter(TopMenuButtonsController.BOOK_LIST_FXML);
     }
 
     void setCenter(String fxmlPath) {
@@ -34,7 +37,7 @@ public class MainController {
     }
 
     @FXML
-    public void closeApplication() {
+    private void closeApplication() {
         Optional<ButtonType> result = DialogUtils.confirmationDialog();
         if (result.get() == ButtonType.OK) {
             Platform.exit();
@@ -44,24 +47,33 @@ public class MainController {
     }
 
     @FXML
-    public void setModena() {
+    private void setModena() {
         Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
+        addStyle(BRIGHT_THEME_CSS);
     }
 
     @FXML
-    public void setCaspian() {
+    private void setCaspian() {
         Application.setUserAgentStylesheet(Application.STYLESHEET_CASPIAN);
+        addStyle(DARK_THEME_CSS);
+    }
+
+    private void addStyle(String path) {
+        borderPane.getScene().getStylesheets().clear();
+        borderPane.getScene().getStylesheets().add(path);
     }
 
     @FXML
-    public void setAlwaysOnTop(ActionEvent actionEvent) {
+    private void setAlwaysOnTop(ActionEvent actionEvent) {
         Stage stage = (Stage) borderPane.getScene().getWindow();
         boolean value = ((CheckMenuItem) actionEvent.getSource()).selectedProperty().get();
         stage.setAlwaysOnTop(value);
     }
 
     @FXML
-    public void about() {
+    private void about() {
         DialogUtils.dialogAboutApplication();
     }
+
+
 }
